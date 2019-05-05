@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Books Excerpts</string>
+    <string name="tit">Title</string>
+    <string name="cont">content</string>
+</resources>
