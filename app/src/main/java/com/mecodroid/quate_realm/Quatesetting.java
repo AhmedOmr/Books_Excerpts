@@ -1,7 +1,11 @@
 package com.mecodroid.quate_realm;
 
+import android.annotation.TargetApi;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
@@ -74,13 +78,29 @@ public class Quatesetting extends AppCompatActivity {
 
     public void deleted_notes(View view) {
         if (fromAdapter) {
-            delt.setEnabled(true);
-            realm.beginTransaction();
-            results.deleteAllFromRealm();
-            realm.commitTransaction();
-            finish();
+            final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setTitle("Delete Quote")
+                    .setMessage("Are you sure to delete this Quote ?")
+                    .setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                        @TargetApi(Build.VERSION_CODES.O)
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            delt.setEnabled(true);
+                            realm.beginTransaction();
+                            results.deleteAllFromRealm();
+                            realm.commitTransaction();
+                            finish();
+                        }
+                    })
+                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+            builder.show();
         } else {
-            Toast.makeText(Quatesetting.this, "No Noted saved to delete", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Quatesetting.this, "No Quote saved to delete", Toast.LENGTH_SHORT).show();
             delt.setEnabled(false);
         }
     }
