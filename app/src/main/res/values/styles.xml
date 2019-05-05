@@ -8,4 +8,8 @@
         <item name="colorAccent">#3E58FA</item>
     </style>
 
+    <style name="splash" parent="Theme.AppCompat.NoActionBar">
+        <item name="colorPrimaryDark">#FFFFFF</item>
+        <item name="colorAccent">#FFFFFF</item>
+    </style>
 </resources>
